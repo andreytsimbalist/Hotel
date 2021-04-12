@@ -12,15 +12,15 @@ public class Room {
         SERVED
     }
 
-    ArrayList<Guest> guests;
+    private ArrayList<Guest> guests;
 
-    ArrayList<Service> services;
+    private ArrayList<Service> services;
 
-    Statuses status;
+    private Statuses status;
 
-    int number;
+    private int number;
 
-    double price;
+    private double price;
 
     public Room(int number, double price) {
         this.number = number;

@@ -6,8 +6,8 @@ import java.util.ArrayList;
 
 @Data
 public class Hotel {
-    ArrayList<Room> rooms;
-    ArrayList<Service> availableServices;
+    private ArrayList<Room> rooms;
+    private ArrayList<Service> availableServices;
 
     public Hotel() {
         rooms = new ArrayList<>();

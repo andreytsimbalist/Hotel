@@ -8,8 +8,14 @@ public class Main {
     public static void main(String[] args) {
         MainInitializer.init();
         Tests.addRooms();
-        HotelService.displayInfo();
         Tests.addServicesToHotel();
+        Tests.accommodateInRoom();
+        Tests.addServicesToRoom();
+        HotelService.displayInfo();
+        Tests.checkOutTheRoom();
+        Tests.changeRoomStatus();
+        Tests.changeRoomPrice();
+        Tests.changePriceOfService();
         HotelService.displayInfo();
     }
 }
