@@ -12,7 +12,7 @@ public class Room {
         SERVED
     }
 
-    private ArrayList<Guest> guests;
+    private Guest guest;
 
     private ArrayList<Service> services;
 
@@ -27,6 +27,6 @@ public class Room {
         this.price = price;
         services = new ArrayList<>();
         status = Statuses.AVAILABLE;
-        guests = new ArrayList<>();
+        guest = new Guest();
     }
 }
