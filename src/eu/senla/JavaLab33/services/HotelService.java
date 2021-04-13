@@ -6,19 +6,19 @@ import eu.senla.JavaLab33.entities.*;
 import java.util.ArrayList;
 
 public class HotelService {
-    public static void addRoom() {
-        ArrayList<Room> rooms = Context.getHotel().getRooms();
-        rooms.add(new Room(rooms.size() + 1, Math.ceil(Context.getRandom().nextDouble() * 10000) / 100.0));
+
+    public static void addRoom(Room room) {
+        Context.getHotel().getRooms().add(room);
     }
 
-    public static boolean tryAddService(String name) {
+    public static boolean tryAddService(Service service) {
         ArrayList<Service> services = Context.getHotel().getAvailableServices();
-        for (Service service : services) {
-            if (service.getName().equals(name)) {
+        for (Service availableService : services) {
+            if (availableService.getName().equals(service.getName())) {
                 return false;
             }
         }
-        services.add(new Service(name, Context.getRandom().nextDouble() * 10));
+        services.add(service);
         return true;
     }
 
@@ -58,7 +58,7 @@ public class HotelService {
     public static boolean tryAccommodateGuest(Guest guest) {
         for (Room room : Context.getHotel().getRooms()) {
             if (room.getPrice() < guest.getMoney() && room.getStatus() == Room.Statuses.AVAILABLE) {
-                room.getGuests().add(guest);
+                room.setGuest(guest);
                 guest.setMoney(guest.getMoney() - room.getPrice());
                 room.setStatus(Room.Statuses.SERVED);
                 return true;
@@ -71,8 +71,7 @@ public class HotelService {
         for (Room room : Context.getHotel().getRooms()) {
             if (room.getNumber() == number - 1 && room.getStatus() == Room.Statuses.SERVED) {
                 room.setStatus(Room.Statuses.AVAILABLE);
-                room.getGuests().clear();
-
+                room.setGuest(new Guest());
                 return true;
             }
         }
@@ -82,10 +81,10 @@ public class HotelService {
     public static void changeRoomStatus(Room.Statuses status, Room room) {
         if (room.getStatus() == Room.Statuses.SERVED) {
             Room newRoom = new Room(Context.getHotel().getRooms().size() + 1, room.getPrice());
-            newRoom.setGuests(room.getGuests());
+            newRoom.setGuest(room.getGuest());
             newRoom.setStatus(Room.Statuses.SERVED);
             Context.getHotel().getRooms().add(newRoom);
-            room.setGuests(new ArrayList<>());
+            room.setGuest(new Guest());
         }
         room.setStatus(status);
     }
@@ -94,7 +93,6 @@ public class HotelService {
         for (Room room : Context.getHotel().getRooms()) {
             if (room.getNumber() == number) {
                 room.setPrice(price);
-
                 return true;
             }
         }
