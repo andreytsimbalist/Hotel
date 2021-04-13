@@ -3,33 +3,39 @@ package eu.senla.JavaLab33.main;
 import eu.senla.JavaLab33.context.Context;
 import eu.senla.JavaLab33.entities.Guest;
 import eu.senla.JavaLab33.entities.Room;
+import eu.senla.JavaLab33.entities.Service;
 import eu.senla.JavaLab33.services.HotelService;
 import eu.senla.JavaLab33.services.RoomService;
 
 public class Tests {
     public static void addRooms() {
         for (int i = 0; i < 10; i++) {
-            HotelService.addRoom();
+            HotelService.addRoom(new Room(Context.getHotel().getRooms().size() + 1,
+                    Math.ceil(Context.getRandom().nextDouble() * 10000) / 100.0));
         }
     }
 
     public static void addServicesToHotel() {
-        if (HotelService.tryAddService("Ambulance")) {
+        if (HotelService.tryAddService(new Service("Ambulance",
+                Context.getRandom().nextDouble() * 10))) {
             System.out.println("Service |Ambulance| added!");
         } else {
             System.out.println("Service |Ambulance| already exist!");
         }
-        if (HotelService.tryAddService("Breakfast in bed")) {
+        if (HotelService.tryAddService(new Service("Breakfast in bed",
+                Context.getRandom().nextDouble() * 10))) {
             System.out.println("Service |Breakfast in bed| added!");
         } else {
             System.out.println("Service |Breakfast in bed| already exist!");
         }
-        if (HotelService.tryAddService("Ambulance")) {
+        if (HotelService.tryAddService(new Service("Ambulance",
+                Context.getRandom().nextDouble() * 10))) {
             System.out.println("Service |Ambulance| added!");
         } else {
             System.out.println("Service |Ambulance| already exist!");
         }
-        if (HotelService.tryAddService("Jacuzzi")) {
+        if (HotelService.tryAddService(new Service("Jacuzzi",
+                Context.getRandom().nextDouble() * 10))) {
             System.out.println("Service |Jacuzzi| added!");
         } else {
             System.out.println("Service |Jacuzzi| already exist!");
@@ -37,54 +43,67 @@ public class Tests {
     }
 
     public static void addServicesToRoom() {
-
         if (RoomService.tryAddService("Ambulance", 4)) {
             System.out.println("Service |Ambulance| added!");
         } else {
-            System.out.println("Service |Ambulance| already exist or there's no such service!");
+            System.out.println("Service |Ambulance| already exist, there's no such service or " +
+                    "Guest haven't enough money!");
         }
         if (RoomService.tryAddService("Breakfast in bed", 4)) {
             System.out.println("Service |Breakfast in bed| added!");
         } else {
-            System.out.println("Service |Breakfast in bed| already exist or there's no such service!");
+            System.out.println("Service |Breakfast in bed| already exist, there's no such service or " +
+                    "Guest haven't enough money!");
         }
         if (RoomService.tryAddService("Ambulance", 4)) {
             System.out.println("Service |Ambulance| added!");
         } else {
-            System.out.println("Service |Ambulance| already exist or there's no such service!");
+            System.out.println("Service |Ambulance| already exist, there's no such service or " +
+                    "Guest haven't enough money!");
         }
         if (RoomService.tryAddService("Jacuzzi", 5)) {
             System.out.println("Service |Jacuzzi| added!");
         } else {
-            System.out.println("Service |Jacuzzi| already exist or there's no such service!");
+            System.out.println("Service |Jacuzzi| already exist, there's no such service or " +
+                    "Guest haven't enough money!");
         }
     }
 
     public static void accommodateInRoom() {
-        if (HotelService.tryAccommodateGuest(new Guest("DAVE", "MORRISSON", "KD0", 1))) {
+        if (HotelService.tryAccommodateGuest(new Guest("DAVE", "MORRISSON",
+                "KD0", 1))) {
             System.out.println("Welcome to the Hotel!");
         } else {
-            System.out.println("You don't have enough money to live in this hotel or there's no available rooms in hotel");
+            System.out.println("You don't have enough money to live in this hotel or there's no" +
+                    " available rooms in hotel");
         }
-        if (HotelService.tryAccommodateGuest(new Guest("Mello", "Jul", "dk12", 227))) {
+        if (HotelService.tryAccommodateGuest(new Guest("Mello", "Jul",
+                "dk12", 227))) {
             System.out.println("Welcome to the Hotel!");
         } else {
-            System.out.println("You don't have enough money to live in this hotel or there's no available rooms in hotel");
+            System.out.println("You don't have enough money to live in this hotel or there's no" +
+                    " available rooms in hotel");
         }
-        if (HotelService.tryAccommodateGuest(new Guest("Jane", "Trickle", "Em23", 73))) {
+        if (HotelService.tryAccommodateGuest(new Guest("Jane", "Trickle",
+                "Em23", 73))) {
             System.out.println("Welcome to the Hotel!");
         } else {
-            System.out.println("You don't have enough money to live in this hotel or there's no available rooms in hotel");
+            System.out.println("You don't have enough money to live in this hotel or there's no" +
+                    " available rooms in hotel");
         }
-        if (HotelService.tryAccommodateGuest(new Guest("Srapky", "Cistern", "Ntr211", 1))) {
+        if (HotelService.tryAccommodateGuest(new Guest("Srapky", "Cistern",
+                "Ntr211", 1))) {
             System.out.println("Welcome to the Hotel!");
         } else {
-            System.out.println("You don't have enough money to live in this hotel or there's no available rooms in hotel");
+            System.out.println("You don't have enough money to live in this hotel or there's no" +
+                    " available rooms in hotel");
         }
-        if (HotelService.tryAccommodateGuest(new Guest("Artyshka", "Salenteva", "Lsa", 21))) {
+        if (HotelService.tryAccommodateGuest(new Guest("Artyshka", "Salenteva",
+                "Lsa", 21))) {
             System.out.println("Welcome to the Hotel!");
         } else {
-            System.out.println("You don't have enough money to live in this hotel or there's no available rooms in hotel");
+            System.out.println("You don't have enough money to live in this hotel or there's no" +
+                    " available rooms in hotel");
         }
     }
 
