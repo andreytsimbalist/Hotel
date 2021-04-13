@@ -4,10 +4,14 @@ import lombok.Data;
 
 @Data
 public class Guest {
-   private String name;
+    private String name;
     private String surname;
     private String passport;
     private double money;
+
+    public Guest() {
+
+    }
 
     public Guest(String name, String surname, String passport, double money) {
         this.name = name;
