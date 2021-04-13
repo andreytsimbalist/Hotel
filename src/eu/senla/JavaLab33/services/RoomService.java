@@ -14,10 +14,21 @@ public class RoomService {
         for (Service service : services) {
             if (service.getName().equals(name)) {
                 for (Room room : Context.getHotel().getRooms()) {
-                   if (room.getNumber() == number && !room.getServices().contains(service)) {
-                       room.getServices().add(service);
-                       return true;
-                   }
+                    if (room.getNumber() == number && !room.getServices().contains(service)) {
+                        if (room.getStatus() == Room.Statuses.SERVED) {
+                            if (room.getGuest().getMoney() >= service.getPrice()) {
+                                room.getGuest().setMoney(room.getGuest().getMoney() - service.getPrice());
+                                room.getServices().add(service);
+                                return true;
+                            } else {
+                                return false;
+                            }
+                        } else {
+                            room.getServices().add(service);
+                            return true;
+                        }
+                    }
+
                 }
             }
         }
