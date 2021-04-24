@@ -57,10 +57,10 @@ public class HotelService {
 
     public static boolean tryAccommodateGuest(Guest guest) {
         for (Room room : Context.getHotel().getRooms()) {
-            if (room.getPrice() < guest.getMoney() && room.getStatus() == Room.Statuses.AVAILABLE) {
+            if (room.getPrice() < guest.getMoney() && room.getStatus() == Statuses.AVAILABLE) {
                 room.setGuest(guest);
                 guest.setMoney(guest.getMoney() - room.getPrice());
-                room.setStatus(Room.Statuses.SERVED);
+                room.setStatus(Statuses.SERVED);
                 return true;
             }
         }
@@ -69,8 +69,8 @@ public class HotelService {
 
     public static boolean tryCheckOutRoom(int number) {
         for (Room room : Context.getHotel().getRooms()) {
-            if (room.getNumber() == number - 1 && room.getStatus() == Room.Statuses.SERVED) {
-                room.setStatus(Room.Statuses.AVAILABLE);
+            if (room.getNumber() == number - 1 && room.getStatus() == Statuses.SERVED) {
+                room.setStatus(Statuses.AVAILABLE);
                 room.setGuest(new Guest());
                 return true;
             }
@@ -78,11 +78,11 @@ public class HotelService {
         return false;
     }
 
-    public static void changeRoomStatus(Room.Statuses status, Room room) {
-        if (room.getStatus() == Room.Statuses.SERVED) {
+    public static void changeRoomStatus(Statuses status, Room room) {
+        if (room.getStatus() == Statuses.SERVED) {
             Room newRoom = new Room(Context.getHotel().getRooms().size() + 1, room.getPrice());
             newRoom.setGuest(room.getGuest());
-            newRoom.setStatus(Room.Statuses.SERVED);
+            newRoom.setStatus(Statuses.SERVED);
             Context.getHotel().getRooms().add(newRoom);
             room.setGuest(new Guest());
         }
