@@ -6,11 +6,6 @@ import java.util.ArrayList;
 
 @Data
 public class Room {
-    public enum Statuses {
-        AVAILABLE,
-        REPAIRED,
-        SERVED
-    }
 
     private Guest guest;
 

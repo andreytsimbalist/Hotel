@@ -9,6 +9,8 @@ public class Guest {
     private String passport;
     private double money;
 
+    otsosi mne chlen
+
     public Guest() {
 
     }

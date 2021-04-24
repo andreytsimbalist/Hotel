@@ -4,6 +4,7 @@ import eu.senla.JavaLab33.context.Context;
 import eu.senla.JavaLab33.entities.Guest;
 import eu.senla.JavaLab33.entities.Room;
 import eu.senla.JavaLab33.entities.Service;
+import eu.senla.JavaLab33.entities.Statuses;
 import eu.senla.JavaLab33.services.HotelService;
 import eu.senla.JavaLab33.services.RoomService;
 
@@ -128,7 +129,7 @@ public class Tests {
     public static void changeRoomStatus() {
         int size = Context.getHotel().getRooms().size();
         for (int i = 0; i < size; i++) {
-            HotelService.changeRoomStatus(Room.Statuses.REPAIRED, Context.getHotel().getRooms().get(i));
+            HotelService.changeRoomStatus(Statuses.REPAIRED, Context.getHotel().getRooms().get(i));
         }
     }
 
