@@ -12,14 +12,14 @@ public class DisplayRoomsByKey implements Action {
 
         RoomController roomController = RoomController.getInstance();
 
-        System.out.println("""
+        System.out.print("""
                 Список номеров, отсортированный по:
                 1. Цене
                 2. Вместимости
                 3. Количеству звезд
                 Ваш выбор:\s""");
         byte choice = ConsoleUtil.getScanner().nextByte();
-
+        System.out.println();
         switch (choice){
             case 1:
                 roomController.getRoomsSortedByPrice()
@@ -36,8 +36,6 @@ public class DisplayRoomsByKey implements Action {
             default:
                 throw new WrongChoice();
         }
-
-        System.out.println();
 
     }
 

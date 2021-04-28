@@ -11,11 +11,12 @@ public class DisplayFacilitiesByKey implements Action  {
     @Override
     public void execute() throws Exception {
         FacilityController facilityController = FacilityController.getInstance();
-        System.out.println("""
+        System.out.print("""
                 Список услуг, отсортированный по:
                 1. Цене
                 Ваш выбор:\s""");
         byte choice = ConsoleUtil.getScanner().nextByte();
+        System.out.println();
         switch (choice){
             case 1:
                 facilityController.getFacilitiesSortedByPrice()
@@ -25,7 +26,6 @@ public class DisplayFacilitiesByKey implements Action  {
                 throw new WrongChoice();
         }
 
-        System.out.println();
     }
 
 }
