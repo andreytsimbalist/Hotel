@@ -18,6 +18,9 @@ public class Runner {
 
         initializers.forEach(Initializer::init);
 
+        Tests test = new Tests();
+        test.test1();
+        test.test2();
     }
 
 }
