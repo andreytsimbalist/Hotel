@@ -22,6 +22,35 @@ public class Runner {
 
         initializers.forEach(Initializer::init);
 
+        RoomController.getInstance().createRoom(
+                GenerationUtil.generatePrice(1, 10),
+                GenerationUtil.getRandom().nextInt(5) + 1,
+                GenerationUtil.getRandom().nextInt(5) + 1);
+
+        RoomController.getInstance().createRoom(
+                GenerationUtil.generatePrice(1, 10),
+                GenerationUtil.getRandom().nextInt(5) + 1,
+                GenerationUtil.getRandom().nextInt(5) + 1);
+
+        RoomController.getInstance().createRoom(
+                GenerationUtil.generatePrice(1, 10),
+                GenerationUtil.getRandom().nextInt(5) + 1,
+                GenerationUtil.getRandom().nextInt(5) + 1);
+
+        RoomController.getInstance().createRoom(
+                GenerationUtil.generatePrice(1, 10),
+                GenerationUtil.getRandom().nextInt(5) + 1,
+                GenerationUtil.getRandom().nextInt(5) + 1);
+
+        RoomController.getInstance().createRoom(
+                GenerationUtil.generatePrice(1, 10),
+                GenerationUtil.getRandom().nextInt(5) + 1,
+                GenerationUtil.getRandom().nextInt(5) + 1);
+
+        RoomController.getInstance().createRoom(
+                GenerationUtil.generatePrice(1, 10),
+                GenerationUtil.getRandom().nextInt(5) + 1,
+                GenerationUtil.getRandom().nextInt(5) + 1);
 
 
         ActionExecutor.execute(new AccommodateInRoom());
