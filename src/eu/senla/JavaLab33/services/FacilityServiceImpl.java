@@ -6,7 +6,9 @@ import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.repositories.FacilityRepositoryImpl;
 
+import java.util.Comparator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class FacilityServiceImpl implements FacilityService {
 
@@ -59,4 +61,11 @@ public class FacilityServiceImpl implements FacilityService {
         facilityRepository.get(id).ifPresent(facility -> facility.setPrice(price));
     }
 
+    @Override
+    public List<Facility> sortByPrice() {
+        return facilityRepository.getAll()
+                .stream()
+                .sorted(Comparator.comparing(Facility::getPrice))
+                .collect(Collectors.toList());
+    }
 }

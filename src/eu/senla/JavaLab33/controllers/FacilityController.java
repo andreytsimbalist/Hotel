@@ -36,6 +36,10 @@ public class FacilityController {
         facilityService.changePrice(id, price);
     }
 
+    public List<Facility> getFacilitiesSortedByPrice(){
+        return facilityService.sortByPrice();
+    }
+
     public long createFacility(String name, double price) {
         return facilityService.create(new Facility(name, price));
     }
