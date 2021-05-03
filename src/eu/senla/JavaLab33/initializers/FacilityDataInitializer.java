@@ -1,10 +1,9 @@
 package eu.senla.JavaLab33.initializers;
 
+import eu.senla.JavaLab33.api.data.FacilityDataStorage;
+import eu.senla.JavaLab33.api.initializers.Initializer;
 import eu.senla.JavaLab33.controllers.FacilityController;
-import eu.senla.JavaLab33.controllers.RoomController;
-import eu.senla.JavaLab33.memodatastorage.DataStorage;
-import eu.senla.JavaLab33.model.Facility;
-import eu.senla.JavaLab33.utils.GenerationUtil;
+import eu.senla.JavaLab33.memodatastorage.FacilityDataStorageImpl;
 
 import java.util.ArrayList;
 
@@ -12,8 +11,8 @@ public class FacilityDataInitializer implements Initializer {
 
     @Override
     public void init() {
-        DataStorage.setFacilityIdSequence(0L);
-        DataStorage.setFacilities(new ArrayList<>());
+        FacilityDataStorage facilityDataStorage = FacilityDataStorageImpl.getInstance();
+        facilityDataStorage.setEntities(new ArrayList<>());
 
         FacilityController facilityController = FacilityController.getInstance();
 

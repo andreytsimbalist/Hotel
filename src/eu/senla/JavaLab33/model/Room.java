@@ -16,6 +16,10 @@ public class Room extends BaseEntity {
 
     private double price;
 
+    public Room() {
+
+    }
+
     public Room(double price, int capacity, int stars) {
         status = RoomStatus.AVAILABLE;
         this.price = price;
@@ -25,8 +29,11 @@ public class Room extends BaseEntity {
 
     @Override
     public String toString() {
-        return "Room ID: " + getId() + "\n\tStatus: " + status + "\n\tPrice: " + price +
-                "\n\tCapacity: " + capacity + "\n\tStars: " + stars + "\n";
+        return "Room ID: " + getId() +
+                "\n\tStatus: " + status +
+                "\n\tPrice: " + price +
+                "\n\tCapacity: " + capacity +
+                "\n\tStars: " + stars + "\n";
     }
 
 }

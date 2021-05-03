@@ -18,10 +18,9 @@ public class ChangePriceOfFacility implements Action {
 
         System.out.print("Новая цена услуги: ");
         double price = ConsoleUtil.getScanner().nextDouble();
-        System.out.println();
 
         facilityController.changeFacilityPrice(id, price);
-        System.out.println("Цена изменена.\n");
+        System.out.println("\nЦена изменена.\n");
 
     }
 

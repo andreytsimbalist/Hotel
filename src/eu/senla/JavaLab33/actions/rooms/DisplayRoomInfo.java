@@ -11,7 +11,7 @@ public class DisplayRoomInfo implements Action {
 
         RoomController roomController = RoomController.getInstance();
         roomController.getAllRooms()
-                .forEach(room -> roomController.displayRoomInfo(room.getId()));
+                .forEach(room -> System.out.println(room.getId()));
 
         System.out.print("ID номера для отображения информации: ");
         long id = ConsoleUtil.getScanner().nextLong();

@@ -16,10 +16,9 @@ public class MakeRoomAvailable implements Action{
 
         System.out.print("ID номера для перевода в готовое состояние: ");
         long id = ConsoleUtil.getScanner().nextLong();
-        System.out.println();
 
         roomController.changeRoomStatus(id, RoomStatus.AVAILABLE);
-        System.out.println("Номер успешно добавлен в обслуживание.\n");
+        System.out.println("\nНомер успешно добавлен в обслуживание.\n");
 
     }
 

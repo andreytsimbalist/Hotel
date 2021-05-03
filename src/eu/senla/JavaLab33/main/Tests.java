@@ -1,11 +1,15 @@
 package eu.senla.JavaLab33.main;
 
 import eu.senla.JavaLab33.actions.ActionExecutor;
+import eu.senla.JavaLab33.actions.bookings.AccommodateInRoom;
+import eu.senla.JavaLab33.actions.rooms.EvictFromRoom;
 import eu.senla.JavaLab33.actions.facilities.AddFacility;
 import eu.senla.JavaLab33.actions.facilities.ChangePriceOfFacility;
 import eu.senla.JavaLab33.actions.facilities.DisplayFacilitiesByKey;
-import eu.senla.JavaLab33.actions.rooms.*;
-import eu.senla.JavaLab33.initializers.RoomDataInitializer;
+import eu.senla.JavaLab33.actions.rooms.AddRoom;
+import eu.senla.JavaLab33.actions.rooms.ChangePriceOfRoom;
+import eu.senla.JavaLab33.actions.rooms.MakeRoomAvailable;
+import eu.senla.JavaLab33.actions.rooms.RenovateRoom;
 
 public class Tests {
 
@@ -22,39 +26,5 @@ public class Tests {
         ActionExecutor.execute((new AddFacility()));
         ActionExecutor.execute((new ChangePriceOfFacility()));
     }
-    public void test3() {
-
-    }
-    public void test4() {
-
-    }
-    public void test5() {
-
-    }
-    public void test6() {
-
-    }
-    public void test7() {
-
-    }
-    public void test8() {
-
-    }
-    public void test9() {
-
-    }
-    public void test10() {
-
-    }
-    public void test11() {
-
-    }
-    public void test12() {
-
-    }
-    public void test13() {
-
-    }
-
 
 }

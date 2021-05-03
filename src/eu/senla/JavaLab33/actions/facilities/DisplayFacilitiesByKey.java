@@ -2,9 +2,11 @@ package eu.senla.JavaLab33.actions.facilities;
 
 import eu.senla.JavaLab33.actions.Action;
 import eu.senla.JavaLab33.controllers.FacilityController;
-import eu.senla.JavaLab33.controllers.RoomController;
-import eu.senla.JavaLab33.exceptions.WrongChoice;
+import eu.senla.JavaLab33.exceptions.WrongChoiceException;
+import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+
+import java.util.Comparator;
 
 public class DisplayFacilitiesByKey implements Action  {
 
@@ -19,11 +21,11 @@ public class DisplayFacilitiesByKey implements Action  {
         System.out.println();
         switch (choice){
             case 1:
-                facilityController.getFacilitiesSortedByPrice()
+                facilityController.getFacilitiesSortedByKey(Comparator.comparing(Facility::getPrice))
                         .forEach(facility -> facilityController.displayFacilityInfo(facility.getId()));
                 break;
             default:
-                throw new WrongChoice();
+                throw new WrongChoiceException();
         }
 
     }

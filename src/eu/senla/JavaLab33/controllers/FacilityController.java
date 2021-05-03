@@ -5,6 +5,7 @@ import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.services.FacilityServiceImpl;
 
+import java.util.Comparator;
 import java.util.List;
 
 public class FacilityController {
@@ -36,8 +37,8 @@ public class FacilityController {
         facilityService.changePrice(id, price);
     }
 
-    public List<Facility> getFacilitiesSortedByPrice(){
-        return facilityService.sortByPrice();
+    public List<Facility> getFacilitiesSortedByKey(Comparator<Facility> comparator){
+        return facilityService.sortByKey(comparator);
     }
 
     public long createFacility(String name, double price) {

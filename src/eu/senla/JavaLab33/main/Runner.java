@@ -1,7 +1,7 @@
 package eu.senla.JavaLab33.main;
 
 import eu.senla.JavaLab33.initializers.FacilityDataInitializer;
-import eu.senla.JavaLab33.initializers.Initializer;
+import eu.senla.JavaLab33.api.initializers.Initializer;
 import eu.senla.JavaLab33.initializers.RoomDataInitializer;
 
 import java.util.Arrays;

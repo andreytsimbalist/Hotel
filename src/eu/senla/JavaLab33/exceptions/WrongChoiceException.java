@@ -1,8 +1,8 @@
 package eu.senla.JavaLab33.exceptions;
 
-public class WrongChoice extends Exception {
+public class WrongChoiceException extends Exception {
 
-    public WrongChoice() {
+    public WrongChoiceException() {
         super("There is no such item.\n");
     }
 

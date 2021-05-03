@@ -18,10 +18,9 @@ public class ChangePriceOfRoom implements Action {
 
         System.out.print("Новая цена номера: ");
         double price = ConsoleUtil.getScanner().nextDouble();
-        System.out.println();
 
         roomController.changeRoomPrice(id, price);
-        System.out.println("Цена изменена.\n");
+        System.out.println("\nЦена изменена.\n");
     }
 
 }

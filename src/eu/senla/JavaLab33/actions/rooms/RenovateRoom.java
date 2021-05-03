@@ -16,10 +16,9 @@ public class RenovateRoom implements Action {
 
         System.out.print("ID номера для ремонта: ");
         long id = ConsoleUtil.getScanner().nextLong();
-        System.out.println();
 
         roomController.changeRoomStatus(id, RoomStatus.REPAIRED);
-        System.out.println("В номере успешно начался ремонт.\n");
+        System.out.println("\nВ номере успешно начался ремонт.\n");
 
     }
 

@@ -11,7 +11,7 @@ public class AddRoom implements Action {
 
         RoomController roomController = RoomController.getInstance();
 
-        System.out.println("Данные новой комнаты:");
+        System.out.println("Данные новой комнаты.");
         System.out.print("Цена номера: ");
         double price = ConsoleUtil.getScanner().nextDouble();
 

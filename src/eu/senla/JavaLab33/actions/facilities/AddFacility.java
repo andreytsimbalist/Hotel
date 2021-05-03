@@ -11,7 +11,7 @@ public class AddFacility implements Action {
 
         FacilityController facilityController = FacilityController.getInstance();
 
-        System.out.println("Данные новой услуги:");
+        System.out.println("Данные новой услуги.");
         System.out.print("Название: ");
         String name = ConsoleUtil.getScanner().next();
         System.out.print("Цена: ");
