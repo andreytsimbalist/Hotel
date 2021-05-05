@@ -3,7 +3,6 @@ package eu.senla.JavaLab33.actions.bookings;
 import eu.senla.JavaLab33.actions.Action;
 import eu.senla.JavaLab33.controllers.BookingController;
 import eu.senla.JavaLab33.controllers.FacilityController;
-import eu.senla.JavaLab33.controllers.GuestController;
 import eu.senla.JavaLab33.exceptions.WrongChoiceException;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
@@ -14,7 +13,6 @@ public class DisplayGuestFacilitiesByKey implements Action {
 
     @Override
     public void execute() throws Exception {
-        GuestController guestController = GuestController.getInstance();
         FacilityController facilityController = FacilityController.getInstance();
         BookingController bookingController = BookingController.getInstance();
 
