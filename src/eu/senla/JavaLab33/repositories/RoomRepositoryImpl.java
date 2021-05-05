@@ -16,7 +16,7 @@ public class RoomRepositoryImpl extends AbstractRepositoryImpl<Room> implements 
     private static RoomDataStorage roomDataStorage;
 
     public RoomRepositoryImpl() {
-        abstractDataStorage = RoomDataStorageImpl.getInstance();
+        super(RoomDataStorageImpl.getInstance());
         roomDataStorage = (RoomDataStorage) abstractDataStorage;
     }
 

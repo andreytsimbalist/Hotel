@@ -12,6 +12,10 @@ public class AbstractRepositoryImpl <T extends BaseEntity> implements AbstractRe
 
     protected AbstractDataStorage<T> abstractDataStorage;
 
+    AbstractRepositoryImpl(AbstractDataStorage<T> abstractDataStorage) {
+        this.abstractDataStorage = abstractDataStorage;
+    }
+
     @Override
     public long create(T entity) {
         return abstractDataStorage.create(entity).getId();

@@ -12,7 +12,7 @@ public class FacilityRepositoryImpl extends AbstractRepositoryImpl<Facility> imp
     private static FacilityDataStorage facilityDataStorage;
 
     public FacilityRepositoryImpl() {
-        abstractDataStorage = FacilityDataStorageImpl.getInstance();
+        super(FacilityDataStorageImpl.getInstance());
         facilityDataStorage = (FacilityDataStorage) abstractDataStorage;
     }
 

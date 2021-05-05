@@ -12,7 +12,7 @@ public class GuestRepositoryImpl extends AbstractRepositoryImpl<Guest> implement
     private static GuestDataStorage guestDataStorage;
 
     public GuestRepositoryImpl() {
-        abstractDataStorage = GuestDataStorageImpl.getInstance();
+        super(GuestDataStorageImpl.getInstance());
         guestDataStorage = (GuestDataStorage) abstractDataStorage;
     }
 

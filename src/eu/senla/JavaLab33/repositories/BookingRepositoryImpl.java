@@ -12,7 +12,7 @@ public class BookingRepositoryImpl extends AbstractRepositoryImpl<Booking> imple
     private static BookingDataStorage bookingDataStorage;
 
     public BookingRepositoryImpl() {
-        abstractDataStorage = BookingDataStorageImpl.getInstance();
+        super(BookingDataStorageImpl.getInstance());
         bookingDataStorage = (BookingDataStorage) abstractDataStorage;
     }
 
