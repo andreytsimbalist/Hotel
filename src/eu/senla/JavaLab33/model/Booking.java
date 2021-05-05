@@ -12,9 +12,8 @@ public class Booking extends BaseEntity {
 
     private Date registrationDate;
 
-    private Date checkOutDate;
-
     private Room room;
+    private Date checkOutDate;
 
     private List<Guest> guests;
 
@@ -45,3 +44,10 @@ public class Booking extends BaseEntity {
     }
 
 }
+
+
+
+
+
+
+
