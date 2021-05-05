@@ -13,6 +13,10 @@ public class AbstractServiceImpl <T extends BaseEntity> implements AbstractServi
 
     protected AbstractRepository<T> abstractRepository;
 
+    AbstractServiceImpl(AbstractRepository<T> abstractRepository){
+        this.abstractRepository = abstractRepository;
+    }
+
     @Override
     public long create(T entity) {
         return abstractRepository.create(entity);

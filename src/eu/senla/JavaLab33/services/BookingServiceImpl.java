@@ -17,8 +17,8 @@ public class BookingServiceImpl extends AbstractServiceImpl<Booking> implements 
 
     private static BookingRepository bookingRepository;
 
-    private BookingServiceImpl() {
-        abstractRepository = BookingRepositoryImpl.getInstance();
+    public BookingServiceImpl() {
+        super(BookingRepositoryImpl.getInstance());
         bookingRepository = (BookingRepository) abstractRepository;
     }
 

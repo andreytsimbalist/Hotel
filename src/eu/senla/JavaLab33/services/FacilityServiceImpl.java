@@ -11,8 +11,8 @@ public class FacilityServiceImpl extends AbstractServiceImpl<Facility> implement
 
     private static FacilityRepository facilityRepository;
 
-    private FacilityServiceImpl() {
-        abstractRepository = FacilityRepositoryImpl.getInstance();
+    public FacilityServiceImpl() {
+        super(FacilityRepositoryImpl.getInstance());
         facilityRepository = (FacilityRepository) abstractRepository;
     }
 

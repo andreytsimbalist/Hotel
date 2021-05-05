@@ -11,8 +11,8 @@ public class GuestServiceImpl extends AbstractServiceImpl<Guest> implements Gues
 
     private static GuestRepository guestRepository;
 
-    private GuestServiceImpl() {
-        abstractRepository = GuestRepositoryImpl.getInstance();
+    public GuestServiceImpl() {
+        super(GuestRepositoryImpl.getInstance());
         guestRepository = (GuestRepository) abstractRepository;
     }
 

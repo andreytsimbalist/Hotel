@@ -17,8 +17,8 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomSe
 
     private static RoomRepository roomRepository;
 
-    private RoomServiceImpl() {
-        abstractRepository = RoomRepositoryImpl.getInstance();
+    public RoomServiceImpl() {
+        super(RoomRepositoryImpl.getInstance());
         roomRepository = (RoomRepository) abstractRepository;
     }
 
