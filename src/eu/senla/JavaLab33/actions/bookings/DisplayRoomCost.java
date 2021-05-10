@@ -5,13 +5,17 @@ import eu.senla.JavaLab33.controllers.BookingController;
 import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class DisplayRoomCost implements Action {
+    @Autowired
+    BookingController bookingController;
 
     @Override
     public void execute() throws Exception {
 
-        BookingController bookingController = BookingController.getInstance();
 
         for (Booking booking : bookingController.getAllBookings()) {
             bookingController.displayBookingInfo(booking.getId());

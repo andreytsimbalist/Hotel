@@ -6,16 +6,22 @@ import eu.senla.JavaLab33.controllers.RoomController;
 import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Date;
 
+@Component
 public class DisplayFreeRoomsByDate implements Action {
+
+    @Autowired
+    BookingController bookingController;
+    @Autowired
+    RoomController roomController;
 
     @Override
     public void execute() throws Exception {
 
-        BookingController bookingController = BookingController.getInstance();
-        RoomController roomController = RoomController.getInstance();
 
         System.out.print("Введите количество дней, по истечению которых номера должны быть свободны: ");
         long days = ConsoleUtil.getScanner().nextLong();
@@ -28,7 +34,7 @@ public class DisplayFreeRoomsByDate implements Action {
                 roomController.displayRoomInfo(booking.getRoom().getId());
             }
         }
-        
+
     }
 
 }

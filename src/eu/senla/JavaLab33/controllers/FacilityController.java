@@ -4,26 +4,17 @@ import eu.senla.JavaLab33.api.services.FacilityService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.services.FacilityServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.Comparator;
 import java.util.List;
 
+@Controller
 public class FacilityController {
 
-    private final FacilityService facilityService;
-
-    private static FacilityController instance;
-
-    private FacilityController() {
-        this.facilityService = FacilityServiceImpl.getInstance();
-    }
-
-    public static FacilityController getInstance() {
-        if (instance == null) {
-            instance = new FacilityController();
-        }
-        return instance;
-    }
+    @Autowired
+    private FacilityService facilityService;
 
     public List<Facility> getAllFacilities() {
         return facilityService.getAll();

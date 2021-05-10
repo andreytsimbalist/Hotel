@@ -5,26 +5,17 @@ import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.services.BookingServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.Comparator;
 import java.util.List;
 
+@Controller
 public class BookingController {
 
-    private final BookingService bookingService;
-
-    private static BookingController instance;
-
-    private BookingController() {
-        this.bookingService = BookingServiceImpl.getInstance();
-    }
-
-    public static BookingController getInstance() {
-        if (instance == null) {
-            instance = new BookingController();
-        }
-        return instance;
-    }
+    @Autowired
+    private BookingService bookingService;
 
     public long createBooking(Booking booking) {
         return bookingService.create(booking);

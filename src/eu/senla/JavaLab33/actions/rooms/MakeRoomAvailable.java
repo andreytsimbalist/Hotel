@@ -4,13 +4,17 @@ import eu.senla.JavaLab33.actions.Action;
 import eu.senla.JavaLab33.controllers.RoomController;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
+@Component
 public class MakeRoomAvailable implements Action{
 
+    @Autowired
+    RoomController roomController;
     @Override
     public void execute() throws Exception {
 
-        RoomController roomController = RoomController.getInstance();
         roomController.getAllRooms()
                 .forEach(room -> roomController.displayRoomInfo(room.getId()));
 

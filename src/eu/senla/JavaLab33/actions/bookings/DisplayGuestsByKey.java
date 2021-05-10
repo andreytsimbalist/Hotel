@@ -9,26 +9,27 @@ import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.Guest;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class DisplayGuestsByKey implements Action {
-
-    GuestController guestController = GuestController.getInstance();
-    RoomController roomController = RoomController.getInstance();
+    @Autowired
+    BookingController bookingController;
+    @Autowired
+    GuestController guestController;
+    @Autowired
+    RoomController roomController;
 
     @Override
     public void execute() throws Exception {
 
-        BookingController bookingController = BookingController.getInstance();
-
-        System.out.print("""
-                Список постояльцев и их номеров, отсортированный по:
-                1. По алфавиту
-                2. По дате освобождения
-                Ваш выбор:\s""");
+        System.out.print("\nСписок постояльцев и их номеров, отсортированный по:"+
+                "\n1. По алфавиту\n2. По дате освобождения\nВаш выбор: ");
         byte choice = ConsoleUtil.getScanner().nextByte();
         System.out.println();
         Date currentDate = new Date();

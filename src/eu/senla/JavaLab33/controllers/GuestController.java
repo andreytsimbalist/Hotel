@@ -4,26 +4,17 @@ import eu.senla.JavaLab33.api.services.GuestService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Guest;
 import eu.senla.JavaLab33.services.GuestServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.Comparator;
 import java.util.List;
 
+@Controller
 public class GuestController {
 
-    private final GuestService guestService;
-
-    private static GuestController instance;
-
-    private GuestController() {
-        this.guestService = GuestServiceImpl.getInstance();
-    }
-
-    public static GuestController getInstance() {
-        if (instance == null) {
-            instance = new GuestController();
-        }
-        return instance;
-    }
+    @Autowired
+    private GuestService guestService;
 
     public Guest getById(long id) throws NoRecordException {
         return guestService.get(id);

@@ -7,18 +7,24 @@ import eu.senla.JavaLab33.controllers.RoomController;
 import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.Guest;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Collections;
 import java.util.List;
 
+@Component
 public class DisplayThreeLastGuests implements Action {
+    @Autowired
+    RoomController roomController;
+    @Autowired
+    BookingController bookingController;
+    @Autowired
+    GuestController guestController;
 
     @Override
     public void execute() throws Exception {
 
-        RoomController roomController = RoomController.getInstance();
-        BookingController bookingController = BookingController.getInstance();
-        GuestController guestController = GuestController.getInstance();
 
         roomController.getAllRooms()
                 .forEach(room -> roomController.displayRoomInfo(room.getId()));

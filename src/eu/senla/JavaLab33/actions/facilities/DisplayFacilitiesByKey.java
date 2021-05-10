@@ -5,21 +5,22 @@ import eu.senla.JavaLab33.controllers.FacilityController;
 import eu.senla.JavaLab33.exceptions.WrongChoiceException;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 
-public class DisplayFacilitiesByKey implements Action  {
+@Component
+public class DisplayFacilitiesByKey implements Action {
+    @Autowired
+    FacilityController facilityController;
 
     @Override
     public void execute() throws Exception {
-        FacilityController facilityController = FacilityController.getInstance();
-        System.out.print("""
-                Список услуг, отсортированный по:
-                1. Цене
-                Ваш выбор:\s""");
+        System.out.print("\nСписок услуг, отсортированный по:\n1. Цене\nВаш выбор: ");
         byte choice = ConsoleUtil.getScanner().nextByte();
         System.out.println();
-        switch (choice){
+        switch (choice) {
             case 1:
                 facilityController.getFacilitiesSortedByKey(Comparator.comparing(Facility::getPrice))
                         .forEach(facility -> facilityController.displayFacilityInfo(facility.getId()));

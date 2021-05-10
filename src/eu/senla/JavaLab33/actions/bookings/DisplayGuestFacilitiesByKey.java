@@ -6,27 +6,29 @@ import eu.senla.JavaLab33.controllers.FacilityController;
 import eu.senla.JavaLab33.exceptions.WrongChoiceException;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.Comparator;
 
+@Component
 public class DisplayGuestFacilitiesByKey implements Action {
+
+    @Autowired
+    FacilityController facilityController;
+    @Autowired
+    BookingController bookingController;
 
     @Override
     public void execute() throws Exception {
-        FacilityController facilityController = FacilityController.getInstance();
-        BookingController bookingController = BookingController.getInstance();
+
 
         bookingController.getAllBookings()
                 .forEach(booking -> bookingController.displayBookingInfo(booking.getId()));
 
         System.out.print("ID заказа для отображения информации: ");
         long id = ConsoleUtil.getScanner().nextLong();
-
-        System.out.print("""
-                Список услуг постояльца, отсортированный по:
-                1. Цене
-                2. Дате
-                Ваш выбор:\s""");
+        System.out.print("\nСписок услуг постояльца, отсортированный по:\n1. Цене\n2. Дате\nВаш выбор: ");
         byte choice = ConsoleUtil.getScanner().nextByte();
         System.out.println();
         switch (choice) {

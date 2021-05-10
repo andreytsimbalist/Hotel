@@ -6,28 +6,20 @@ import eu.senla.JavaLab33.api.services.RoomService;
 import eu.senla.JavaLab33.model.Room;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
 import eu.senla.JavaLab33.repositories.RoomRepositoryImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Service
 public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomService {
 
-    private static RoomService instance;
 
-    private static RoomRepository roomRepository;
+    @Autowired
+    private RoomRepository roomRepository;
 
-    public RoomServiceImpl() {
-        super(RoomRepositoryImpl.getInstance());
-        roomRepository = (RoomRepository) abstractRepository;
-    }
-
-    public static RoomService getInstance() {
-        if (instance == null) {
-            instance = new RoomServiceImpl();
-        }
-        return instance;
-    }
 
     @Override
     public void changeStatus(long id, RoomStatus roomStatus) {

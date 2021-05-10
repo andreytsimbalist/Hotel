@@ -10,19 +10,25 @@ import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.Room;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
 import eu.senla.JavaLab33.utils.ConsoleUtil;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Component
 public class AccommodateInRoom implements Action {
+    @Autowired
+    private RoomController roomController;
+    @Autowired
+    private BookingController bookingController;
+    @Autowired
+    private GuestController guestController;
 
     @Override
     public void execute() throws Exception {
 
-        RoomController roomController = RoomController.getInstance();
-        BookingController bookingController = BookingController.getInstance();
-        GuestController guestController = GuestController.getInstance();
 
         System.out.println("Количество людей для заселения: ");
         int count = ConsoleUtil.getScanner().nextInt();

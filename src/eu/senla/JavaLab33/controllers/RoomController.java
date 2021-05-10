@@ -5,26 +5,17 @@ import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Room;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
 import eu.senla.JavaLab33.services.RoomServiceImpl;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 
 import java.util.Comparator;
 import java.util.List;
 
+@Controller
 public class RoomController {
 
-    private final RoomService roomService;
-
-    private static RoomController instance;
-
-    private RoomController() {
-        this.roomService = RoomServiceImpl.getInstance();
-    }
-
-    public static RoomController getInstance() {
-        if (instance == null) {
-            instance = new RoomController();
-        }
-        return instance;
-    }
+    @Autowired
+    private RoomService roomService;
 
     public Room getRoom(long id) throws NoRecordException {
         return roomService.get(id);
