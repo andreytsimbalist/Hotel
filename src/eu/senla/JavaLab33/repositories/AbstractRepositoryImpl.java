@@ -1,27 +1,17 @@
 package eu.senla.JavaLab33.repositories;
 
+import eu.senla.JavaLab33.api.data.AbstractDataStorage;
 import eu.senla.JavaLab33.api.repositories.AbstractRepository;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
-import eu.senla.JavaLab33.api.data.AbstractDataStorage;
 import eu.senla.JavaLab33.memodatastorage.AbstractDataStorageImpl;
 import eu.senla.JavaLab33.model.BaseEntity;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
-@Repository
 public class AbstractRepositoryImpl <T extends BaseEntity> implements AbstractRepository<T> {
 
-    protected final AbstractDataStorage<T> abstractDataStorage;
-
-    public AbstractRepositoryImpl() {
-        this.abstractDataStorage = new AbstractDataStorageImpl<>();
-    }
+    protected final AbstractDataStorage<T> abstractDataStorage = new AbstractDataStorageImpl<>();
 
     @Override
     public long create(T entity) {

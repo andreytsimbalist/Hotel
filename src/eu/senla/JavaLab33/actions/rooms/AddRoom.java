@@ -8,7 +8,10 @@ import org.springframework.stereotype.Component;
 
 @Component
 public class AddRoom implements Action {
-    @Autowired RoomController roomController;
+
+    @Autowired
+    RoomController roomController;
+
     @Override
     public void execute() throws Exception {
 

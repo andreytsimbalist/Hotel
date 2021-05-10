@@ -4,15 +4,12 @@ import eu.senla.JavaLab33.api.data.AbstractDataStorage;
 import eu.senla.JavaLab33.model.BaseEntity;
 import lombok.Getter;
 import lombok.Setter;
-import org.springframework.context.annotation.Primary;
-import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Getter
 @Setter
-@Component
 public class AbstractDataStorageImpl<T extends BaseEntity> implements AbstractDataStorage<T> {
 
     private long entityIdSequence;
