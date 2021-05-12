@@ -4,9 +4,7 @@ import eu.senla.JavaLab33.api.repositories.AbstractRepository;
 import eu.senla.JavaLab33.api.services.AbstractService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.BaseEntity;
-import eu.senla.JavaLab33.repositories.AbstractRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 
 import java.util.Comparator;
 import java.util.List;
@@ -16,11 +14,6 @@ public class AbstractServiceImpl <T extends BaseEntity> implements AbstractServi
 
     @Autowired
     protected AbstractRepository<T> abstractRepository;
-
-    @Bean
-    public AbstractRepository<T> injectingRepository() {
-        return new AbstractRepositoryImpl<>();
-    }
 
     @Override
     public long create(T entity) {

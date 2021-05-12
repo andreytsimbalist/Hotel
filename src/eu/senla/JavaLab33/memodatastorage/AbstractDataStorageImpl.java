@@ -20,16 +20,6 @@ public class AbstractDataStorageImpl<T extends BaseEntity> implements AbstractDa
         return entityIdSequence++;
     }
 
-//    @Override
-//    public void setEntities(List<T> entities) {
-//        this.entities = entities;
-//    }
-//
-//    @Override
-//    public List<T> getEntities() {
-//        return entities;
-//    }
-
     @Override
     public T create(T entity) {
         entity.setId(generateEntityId());
