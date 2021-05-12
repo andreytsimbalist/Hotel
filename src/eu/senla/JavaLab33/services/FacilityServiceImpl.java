@@ -3,7 +3,6 @@ package eu.senla.JavaLab33.services;
 import eu.senla.JavaLab33.api.repositories.FacilityRepository;
 import eu.senla.JavaLab33.api.services.FacilityService;
 import eu.senla.JavaLab33.model.Facility;
-import eu.senla.JavaLab33.repositories.FacilityRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,6 @@ public class FacilityServiceImpl extends AbstractServiceImpl<Facility> implement
 
     @Autowired
     private FacilityRepository facilityRepository;
-
 
     @Override
     public void changePrice(long id, double price) {

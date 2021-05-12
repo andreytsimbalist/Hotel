@@ -10,8 +10,6 @@ public interface AbstractDataStorage<T extends BaseEntity>{
 
     void setEntities(List<T> entities);
 
-    long generateEntityId();
-
     T create(T entity);
 
 }

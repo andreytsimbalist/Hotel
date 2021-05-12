@@ -5,13 +5,21 @@ import eu.senla.JavaLab33.api.repositories.AbstractRepository;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.memodatastorage.AbstractDataStorageImpl;
 import eu.senla.JavaLab33.model.BaseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
 
 import java.util.List;
 import java.util.Optional;
 
 public class AbstractRepositoryImpl <T extends BaseEntity> implements AbstractRepository<T> {
 
-    protected final AbstractDataStorage<T> abstractDataStorage = new AbstractDataStorageImpl<>();
+    @Autowired
+    protected AbstractDataStorage<T> abstractDataStorage;
+
+    @Bean
+    public AbstractDataStorage<T> injectingDataStorage() {
+        return new AbstractDataStorageImpl<>();
+    }
 
     @Override
     public long create(T entity) {

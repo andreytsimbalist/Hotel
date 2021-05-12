@@ -7,6 +7,4 @@ import org.springframework.stereotype.Component;
 @Component
 public class BookingDataStorageImpl extends AbstractDataStorageImpl<Booking> implements BookingDataStorage {
 
-
-
 }

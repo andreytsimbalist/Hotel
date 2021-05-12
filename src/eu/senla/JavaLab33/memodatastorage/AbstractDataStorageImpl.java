@@ -16,20 +16,19 @@ public class AbstractDataStorageImpl<T extends BaseEntity> implements AbstractDa
 
     private List<T> entities = new ArrayList<>();
 
-    @Override
-    public void setEntities(List<T> entities) {
-        this.entities = entities;
-    }
-
-    @Override
-    public List<T> getEntities() {
-        return entities;
-    }
-
-    @Override
-    public long generateEntityId() {
+    protected long generateEntityId() {
         return entityIdSequence++;
     }
+
+//    @Override
+//    public void setEntities(List<T> entities) {
+//        this.entities = entities;
+//    }
+//
+//    @Override
+//    public List<T> getEntities() {
+//        return entities;
+//    }
 
     @Override
     public T create(T entity) {

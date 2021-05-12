@@ -5,7 +5,6 @@ import eu.senla.JavaLab33.api.services.BookingService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.Facility;
-import eu.senla.JavaLab33.repositories.BookingRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class BookingServiceImpl extends AbstractServiceImpl<Booking> implements BookingService {
 
-
     @Autowired
     private BookingRepository bookingRepository;
-
 
     @Override
     public List<Facility> facilitySortedByKey(long id, Comparator<Facility> comparator) throws NoRecordException {

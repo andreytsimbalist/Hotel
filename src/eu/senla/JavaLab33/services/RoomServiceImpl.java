@@ -5,7 +5,6 @@ import eu.senla.JavaLab33.api.repositories.RoomRepository;
 import eu.senla.JavaLab33.api.services.RoomService;
 import eu.senla.JavaLab33.model.Room;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
-import eu.senla.JavaLab33.repositories.RoomRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +15,8 @@ import java.util.stream.Collectors;
 @Service
 public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomService {
 
-
     @Autowired
     private RoomRepository roomRepository;
-
 
     @Override
     public void changeStatus(long id, RoomStatus roomStatus) {
