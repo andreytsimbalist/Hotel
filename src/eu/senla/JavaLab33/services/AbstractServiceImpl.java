@@ -10,7 +10,7 @@ import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 
-public class AbstractServiceImpl <T extends BaseEntity> implements AbstractService<T> {
+public abstract class AbstractServiceImpl <T extends BaseEntity> implements AbstractService<T> {
 
     @Autowired
     protected AbstractRepository<T> abstractRepository;

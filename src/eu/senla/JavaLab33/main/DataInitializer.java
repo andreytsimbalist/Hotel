@@ -23,6 +23,7 @@ public class DataInitializer {
     private GuestDataInitializer guestDataInitializer;
     @Autowired
     private BookingDataInitializer bookingDataInitializer;
+
     @Bean
     public void init(){
         List<Initializer> initializers = Arrays.asList(

@@ -3,14 +3,13 @@ package eu.senla.JavaLab33.controllers;
 import eu.senla.JavaLab33.api.services.FacilityService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Facility;
-import eu.senla.JavaLab33.services.FacilityServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Comparator;
 import java.util.List;
 
-@Controller
+@RestController
 public class FacilityController {
 
     @Autowired

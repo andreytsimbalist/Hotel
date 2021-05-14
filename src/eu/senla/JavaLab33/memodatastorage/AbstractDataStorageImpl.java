@@ -10,7 +10,7 @@ import java.util.List;
 
 @Getter
 @Setter
-public class AbstractDataStorageImpl<T extends BaseEntity> implements AbstractDataStorage<T> {
+public abstract class AbstractDataStorageImpl<T extends BaseEntity> implements AbstractDataStorage<T> {
 
     private long entityIdSequence;
 

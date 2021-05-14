@@ -4,14 +4,13 @@ import eu.senla.JavaLab33.api.services.RoomService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Room;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
-import eu.senla.JavaLab33.services.RoomServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.Comparator;
 import java.util.List;
 
-@Controller
+@RestController
 public class RoomController {
 
     @Autowired

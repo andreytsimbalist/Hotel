@@ -18,7 +18,7 @@ public class RoomRepositoryImpl extends AbstractRepositoryImpl<Room> implements 
 
     @Override
     public List<Room> getFreeRooms(){
-        return abstractDataStorage.getEntities()
+        return roomDataStorage.getEntities()
                 .stream()
                 .filter(room -> room.getStatus() == RoomStatus.AVAILABLE)
                 .collect(Collectors.toList());

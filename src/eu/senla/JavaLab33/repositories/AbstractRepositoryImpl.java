@@ -9,7 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import java.util.List;
 import java.util.Optional;
 
-public class AbstractRepositoryImpl <T extends BaseEntity> implements AbstractRepository<T> {
+public abstract class AbstractRepositoryImpl <T extends BaseEntity> implements AbstractRepository<T> {
 
     @Autowired
     protected AbstractDataStorage<T> abstractDataStorage;
