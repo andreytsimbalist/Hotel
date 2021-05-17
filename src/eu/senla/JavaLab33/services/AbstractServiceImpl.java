@@ -6,9 +6,7 @@ import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.BaseEntity;
 import org.springframework.beans.factory.annotation.Autowired;
 
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public abstract class AbstractServiceImpl <T extends BaseEntity> implements AbstractService<T> {
 
@@ -38,19 +36,6 @@ public abstract class AbstractServiceImpl <T extends BaseEntity> implements Abst
     @Override
     public List<T> getAll() {
         return abstractRepository.getAll();
-    }
-
-    @Override
-    public void displayInfo(long id) {
-        abstractRepository.get(id).ifPresent(System.out::println);
-    }
-
-    @Override
-    public List<T> sortByKey(Comparator<T> comparator) {
-        return abstractRepository.getAll()
-                .stream()
-                .sorted(comparator)
-                .collect(Collectors.toList());
     }
 
 }

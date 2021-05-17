@@ -2,8 +2,8 @@ package eu.senla.JavaLab33.services;
 
 import eu.senla.JavaLab33.api.repositories.GuestRepository;
 import eu.senla.JavaLab33.api.services.GuestService;
+import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Guest;
-import eu.senla.JavaLab33.repositories.GuestRepositoryImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,5 +12,17 @@ public class GuestServiceImpl extends AbstractServiceImpl<Guest> implements Gues
 
     @Autowired
     private GuestRepository guestRepository;
+
+    @Override
+    public long indexOf(Guest entity) throws NoRecordException {
+        for (Guest guest : guestRepository.getAll()) {
+            if (guest.getPhone().equals(entity.getPhone()) &&
+                    guest.getFirstName().equals(entity.getFirstName()) &&
+                    guest.getSecondName().equals(entity.getSecondName())) {
+                return guest.getId();
+            }
+        }
+        throw new NoRecordException();
+    }
 
 }

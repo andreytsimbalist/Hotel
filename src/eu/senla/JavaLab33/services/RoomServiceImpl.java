@@ -3,8 +3,10 @@ package eu.senla.JavaLab33.services;
 
 import eu.senla.JavaLab33.api.repositories.RoomRepository;
 import eu.senla.JavaLab33.api.services.RoomService;
+import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Room;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
+import eu.senla.JavaLab33.model.enums.SortComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,12 +22,12 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomSe
 
     @Override
     public void changeStatus(long id, RoomStatus roomStatus) {
-        abstractRepository.get(id).ifPresent(room -> room.setStatus(roomStatus));
+        roomRepository.get(id).ifPresent(room -> room.setStatus(roomStatus));
     }
 
     @Override
     public List<Room> getRoomsByStatus(RoomStatus roomStatus) {
-        return abstractRepository.getAll()
+        return roomRepository.getAll()
                 .stream()
                 .filter(room -> room.getStatus() == roomStatus)
                 .collect(Collectors.toList());
@@ -33,7 +35,7 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomSe
 
     @Override
     public List<Room> getRoomsByCapacity(int capacity) {
-        return abstractRepository.getAll()
+        return roomRepository.getAll()
                 .stream()
                 .filter(room -> room.getCapacity() >= capacity)
                 .collect(Collectors.toList());
@@ -41,15 +43,44 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomSe
 
     @Override
     public void changePrice(long id, double price) {
-        abstractRepository.get(id).ifPresent(room -> room.setPrice(price));
+        roomRepository.get(id).ifPresent(room -> room.setPrice(price));
     }
 
     @Override
-    public List<Room> sortFreeByKey(Comparator<Room> comparator) {
+    public List<Room> sortFreeByKey(SortComparator sortComparator) {
+        Comparator<Room> comparator = getComparator(sortComparator);
+        if (comparator == null) {
+            return null;
+        }
         return roomRepository.getFreeRooms()
                 .stream()
                 .sorted(comparator)
                 .collect(Collectors.toList());
+    }
+
+    @Override
+    public List<Room> sortByKey(SortComparator sortComparator) {
+        Comparator<Room> comparator = getComparator(sortComparator);
+        if (comparator == null) {
+            return null;
+        }
+        return roomRepository.getAll()
+                .stream()
+                .sorted(comparator)
+                .collect(Collectors.toList());
+    }
+
+    private Comparator<Room> getComparator(SortComparator sortComparator) {
+        switch (sortComparator) {
+            case PRICE:
+                return Comparator.comparing(Room::getPrice);
+            case CAPACITY:
+                return Comparator.comparing(Room::getCapacity);
+            case STARS:
+                return Comparator.comparing(Room::getStars);
+            default:
+                return null;
+        }
     }
 
     @Override

@@ -3,10 +3,9 @@ package eu.senla.JavaLab33.api.services;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.BaseEntity;
 
-import java.util.Comparator;
 import java.util.List;
 
-public interface AbstractService <T extends BaseEntity>{
+public interface AbstractService<T extends BaseEntity> {
 
     long create(T entity);
 
@@ -18,7 +17,4 @@ public interface AbstractService <T extends BaseEntity>{
 
     List<T> getAll();
 
-    void displayInfo(long id);
-
-    List<T> sortByKey(Comparator<T> comparator);
 }

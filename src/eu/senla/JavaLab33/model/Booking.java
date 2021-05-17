@@ -11,12 +11,9 @@ import java.util.List;
 public class Booking extends BaseEntity {
 
     private Date registrationDate;
-
     private Room room;
     private Date checkOutDate;
-
     private List<Guest> guests;
-
     private List<Facility> facilities;
 
     private String guestsToString() {

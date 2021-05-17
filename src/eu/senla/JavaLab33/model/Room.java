@@ -9,16 +9,9 @@ import lombok.Setter;
 public class Room extends BaseEntity {
 
     private int stars;
-
     private RoomStatus status;
-
     private int capacity;
-
     private double price;
-
-    public Room() {
-
-    }
 
     public Room(double price, int capacity, int stars) {
         status = RoomStatus.AVAILABLE;

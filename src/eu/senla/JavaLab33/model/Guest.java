@@ -8,9 +8,7 @@ import lombok.Setter;
 public class Guest extends BaseEntity {
 
     private String firstName;
-
     private String secondName;
-
     private String phone;
 
     public Guest(String firstName, String secondName, String phone) {

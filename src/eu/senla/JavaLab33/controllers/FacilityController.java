@@ -3,39 +3,45 @@ package eu.senla.JavaLab33.controllers;
 import eu.senla.JavaLab33.api.services.FacilityService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Facility;
+import eu.senla.JavaLab33.model.enums.SortComparator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
 import java.util.List;
 
 @RestController
+@RequestMapping("/facility")
 public class FacilityController {
 
     @Autowired
     private FacilityService facilityService;
 
+    @GetMapping("/all")
     public List<Facility> getAllFacilities() {
         return facilityService.getAll();
     }
 
-    public void displayFacilityInfo(long id) {
-        facilityService.displayInfo(id);
-    }
-
-    public void changeFacilityPrice(long id, double price) {
+    @PutMapping("/facility{id}newPrice{price}")
+    public void changeFacilityPrice(@PathVariable long id, @PathVariable double price) {
         facilityService.changePrice(id, price);
     }
 
-    public List<Facility> getFacilitiesSortedByKey(Comparator<Facility> comparator){
-        return facilityService.sortByKey(comparator);
+    @GetMapping("/sortedby{sortComparator}")
+    public List<Facility> getFacilitiesSortedByKey(@PathVariable SortComparator sortComparator) {
+        return facilityService.sortByKey(sortComparator);
     }
 
-    public long createFacility(String name, double price) {
-        return facilityService.create(new Facility(name, price));
+    @PostMapping("/create")
+    public long createFacility(@RequestBody Facility facility) {
+        try {
+            return facilityService.indexOf(facility);
+        } catch(NoRecordException noRecordException) {
+            return facilityService.create(facility);
+        }
     }
 
-    public Facility getFacilityById(long id) throws NoRecordException {
+    @GetMapping("/{id}")
+    public Facility getFacilityById(@PathVariable long id) throws NoRecordException {
         return facilityService.get(id);
     }
 

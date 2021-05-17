@@ -4,58 +4,65 @@ import eu.senla.JavaLab33.api.services.RoomService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Room;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
+import eu.senla.JavaLab33.model.enums.SortComparator;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.Comparator;
 import java.util.List;
 
 @RestController
+@RequestMapping("/room")
 public class RoomController {
 
     @Autowired
     private RoomService roomService;
 
-    public Room getRoom(long id) throws NoRecordException {
+    @GetMapping("/{id}")
+    public Room getRoom(@PathVariable long id) throws NoRecordException {
         return roomService.get(id);
     }
 
-    public List<Room> getRoomsByStatus(RoomStatus roomStatus) {
+    @GetMapping("/bystatus{roomStatus}")
+    public List<Room> getRoomsByStatus(@PathVariable RoomStatus roomStatus) {
         return roomService.getRoomsByStatus(roomStatus);
     }
 
-    public void displayRoomInfo(long id) {
-        roomService.displayInfo(id);
-    }
-
-    public void changeRoomStatus(long id, RoomStatus roomStatus) {
+    @PutMapping("/changestatus")
+    public void changeRoomStatus(@RequestParam long id, @RequestParam RoomStatus roomStatus) {
         roomService.changeStatus(id, roomStatus);
     }
 
+    @GetMapping("/all")
     public List<Room> getAllRooms() {
         return roomService.getAll();
     }
 
-    public void changeRoomPrice(long id, double price) {
+    @PutMapping("/changeprice")
+    public void changeRoomPrice(@RequestParam long id, @RequestParam double price) {
         roomService.changePrice(id, price);
     }
 
-    public long createRoom(double price, int capacity, int stars) {
-        return roomService.create(new Room(price, capacity, stars));
+    @PostMapping("/create")
+    public long createRoom(@RequestBody Room room) {
+        return roomService.create(room);
     }
 
-    public List<Room> getRoomsByCapacity(int capacity) {
+    @GetMapping("/bycapacity{capacity}")
+    public List<Room> getRoomsByCapacity(@PathVariable int capacity) {
         return roomService.getRoomsByCapacity(capacity);
     }
 
-    public List<Room> getRoomsSortedByKey(Comparator<Room> comparator) {
-        return roomService.sortByKey(comparator);
+    @GetMapping("/sortedby{sortComparator}")
+    public List<Room> getRoomsSortedByKey(@PathVariable SortComparator sortComparator) {
+        return roomService.sortByKey(sortComparator);
     }
 
-    public List<Room> getFreeRoomsSortedByKey(Comparator<Room> comparator) {
-        return roomService.sortFreeByKey(comparator);
+    @GetMapping("/freesortedby{sortComparator}")
+    public List<Room> getFreeRoomsSortedByKey(@PathVariable SortComparator sortComparator) {
+        return roomService.sortFreeByKey(sortComparator);
     }
 
+    @GetMapping("/number")
     public int getNumberOfFreeRooms() {
         return roomService.numberOfFreeRooms();
     }
