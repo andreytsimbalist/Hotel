@@ -1,10 +1,11 @@
 package eu.senla.JavaLab33.model.enums;
 
-public enum SortComparator {
+public enum SortKey {
     PRICE,
     CAPACITY,
     STARS,
     ALPHABET,
     CHECKOUTDATE,
-    DATE
+    DATE,
+    NULL
 }

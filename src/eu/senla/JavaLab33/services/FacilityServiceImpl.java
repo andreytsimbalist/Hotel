@@ -2,9 +2,8 @@ package eu.senla.JavaLab33.services;
 
 import eu.senla.JavaLab33.api.repositories.FacilityRepository;
 import eu.senla.JavaLab33.api.services.FacilityService;
-import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Facility;
-import eu.senla.JavaLab33.model.enums.SortComparator;
+import eu.senla.JavaLab33.model.enums.SortKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,13 +18,13 @@ public class FacilityServiceImpl extends AbstractServiceImpl<Facility> implement
     private FacilityRepository facilityRepository;
 
     @Override
-    public void changePrice(long id, double price) {
-        abstractRepository.get(id).ifPresent(facility -> facility.setPrice(price));
+    public void changeInfo(Facility facility) {
+        abstractRepository.update(facility);
     }
 
     @Override
-    public List<Facility> sortByKey(SortComparator sortComparator) {
-        switch (sortComparator) {
+    public List<Facility> sortByKey(SortKey sortKey) {
+        switch (sortKey) {
             case PRICE:
                 return facilityRepository.getAll()
                         .stream()
@@ -37,14 +36,14 @@ public class FacilityServiceImpl extends AbstractServiceImpl<Facility> implement
     }
 
     @Override
-    public long indexOf(Facility entity) throws NoRecordException {
+    public long indexOf(Facility entity) {
         for (Facility facility : facilityRepository.getAll()) {
             if (facility.getPrice() == entity.getPrice() &&
                     facility.getName().equals(entity.getName())) {
                 return facility.getId();
             }
         }
-        throw new NoRecordException();
+        return facilityRepository.create(entity);
     }
 
 }

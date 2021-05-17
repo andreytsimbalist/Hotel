@@ -3,15 +3,16 @@ package eu.senla.JavaLab33.controllers;
 import eu.senla.JavaLab33.api.services.RoomService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Room;
+import eu.senla.JavaLab33.model.enums.FilterKey;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
-import eu.senla.JavaLab33.model.enums.SortComparator;
+import eu.senla.JavaLab33.model.enums.SortKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/room")
+@RequestMapping("/v1/rooms")
 public class RoomController {
 
     @Autowired
@@ -22,14 +23,9 @@ public class RoomController {
         return roomService.get(id);
     }
 
-    @GetMapping("/bystatus{roomStatus}")
-    public List<Room> getRoomsByStatus(@PathVariable RoomStatus roomStatus) {
-        return roomService.getRoomsByStatus(roomStatus);
-    }
-
-    @PutMapping("/changestatus")
-    public void changeRoomStatus(@RequestParam long id, @RequestParam RoomStatus roomStatus) {
-        roomService.changeStatus(id, roomStatus);
+    @PutMapping
+    public void changeRoomInfo(@RequestBody Room room) {
+        roomService.changeInfo(room);
     }
 
     @GetMapping("/all")
@@ -37,29 +33,25 @@ public class RoomController {
         return roomService.getAll();
     }
 
-    @PutMapping("/changeprice")
-    public void changeRoomPrice(@RequestParam long id, @RequestParam double price) {
-        roomService.changePrice(id, price);
-    }
-
     @PostMapping("/create")
     public long createRoom(@RequestBody Room room) {
         return roomService.create(room);
     }
 
-    @GetMapping("/bycapacity{capacity}")
-    public List<Room> getRoomsByCapacity(@PathVariable int capacity) {
-        return roomService.getRoomsByCapacity(capacity);
+    @GetMapping("/filter")
+    public List<Room> getRoomsFilterByKey(@RequestParam FilterKey key, @RequestParam int capacity,
+                                          @RequestParam RoomStatus roomStatus) {
+        return roomService.getRoomsFilterByKey(key, capacity, roomStatus);
     }
 
-    @GetMapping("/sortedby{sortComparator}")
-    public List<Room> getRoomsSortedByKey(@PathVariable SortComparator sortComparator) {
-        return roomService.sortByKey(sortComparator);
+    @GetMapping("/sort")
+    public List<Room> getRoomsSortedByKey(@RequestParam SortKey key) {
+        return roomService.sortByKey(key);
     }
 
-    @GetMapping("/freesortedby{sortComparator}")
-    public List<Room> getFreeRoomsSortedByKey(@PathVariable SortComparator sortComparator) {
-        return roomService.sortFreeByKey(sortComparator);
+    @GetMapping("/free/sort")
+    public List<Room> getFreeRoomsSortedByKey(@RequestParam SortKey key) {
+        return roomService.sortFreeByKey(key);
     }
 
     @GetMapping("/number")

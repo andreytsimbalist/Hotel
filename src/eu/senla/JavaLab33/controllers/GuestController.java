@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/guest")
+@RequestMapping("/v1/guests")
 public class GuestController {
 
     @Autowired
@@ -22,11 +22,7 @@ public class GuestController {
 
     @PostMapping("/create")
     public long createGuest(@RequestBody Guest guest) {
-        try {
-            return guestService.indexOf(guest);
-        } catch(NoRecordException noRecordException) {
-            return guestService.create(guest);
-        }
+        return guestService.indexOf(guest);
     }
 
     @GetMapping("/all")

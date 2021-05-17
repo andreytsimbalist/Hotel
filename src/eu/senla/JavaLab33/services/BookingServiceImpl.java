@@ -7,7 +7,7 @@ import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.Facility;
 import eu.senla.JavaLab33.model.Guest;
-import eu.senla.JavaLab33.model.enums.SortComparator;
+import eu.senla.JavaLab33.model.enums.SortKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,7 +25,7 @@ public class BookingServiceImpl extends AbstractServiceImpl<Booking> implements 
     private GuestRepository guestRepository;
 
     @Override
-    public List<Facility> facilitySortedByKey(long id, SortComparator sortComparator) throws NoRecordException {
+    public List<Facility> facilitySortedByKey(long id, SortKey sortKey) throws NoRecordException {
         Booking booking;
         Comparator<Facility> comparator = null;
         if (bookingRepository.get(id).isPresent()) {
@@ -33,7 +33,7 @@ public class BookingServiceImpl extends AbstractServiceImpl<Booking> implements 
         } else {
             throw new NoRecordException();
         }
-        switch (sortComparator) {
+        switch (sortKey) {
             case PRICE:
                 comparator = Comparator.comparing(Facility::getPrice);
                 break;
@@ -49,8 +49,9 @@ public class BookingServiceImpl extends AbstractServiceImpl<Booking> implements 
                 .collect(Collectors.toList());
     }
 
-    public List<Booking> sortByKey(SortComparator sortComparator) {
-        switch (sortComparator) {
+    @Override
+    public List<Booking> sortByKey(SortKey sortKey) {
+        switch (sortKey) {
             case ALPHABET:
                 List<Guest> guests = guestRepository.getAll()
                         .stream()

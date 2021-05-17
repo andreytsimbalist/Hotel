@@ -6,15 +6,14 @@ import eu.senla.JavaLab33.api.services.GuestService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Booking;
 import eu.senla.JavaLab33.model.Facility;
-import eu.senla.JavaLab33.model.Guest;
-import eu.senla.JavaLab33.model.enums.SortComparator;
+import eu.senla.JavaLab33.model.enums.SortKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/booking")
+@RequestMapping("/v1/bookings")
 public class BookingController {
 
     @Autowired
@@ -26,20 +25,8 @@ public class BookingController {
 
     @PostMapping("/create")
     public long createBooking(@RequestBody Booking booking) {
-        for (Facility facility : booking.getFacilities()) {
-            try {
-                facility.setId(facilityService.indexOf(facility));
-            } catch (NoRecordException noRecordException) {
-                facilityService.create(facility);
-            }
-        }
-        for (Guest guest : booking.getGuests()) {
-            try {
-                guest.setId(guestService.indexOf(guest));
-            } catch (NoRecordException noRecordException) {
-                guestService.create(guest);
-            }
-        }
+        booking.getFacilities().forEach(facility -> facility.setId(facilityService.indexOf(facility)));
+        booking.getGuests().forEach(guest -> guest.setId(guestService.indexOf(guest)));
         return bookingService.create(booking);
     }
 
@@ -53,15 +40,15 @@ public class BookingController {
         return bookingService.get(id);
     }
 
-    @GetMapping("/sortedby{sortComparator}")
-    public List<Booking> getBookingsSortedByKey(@PathVariable SortComparator sortComparator) {
-        return bookingService.sortByKey(sortComparator);
+    @GetMapping("/sort")
+    public List<Booking> getBookingsSortedByKey(@RequestParam SortKey key) {
+        return bookingService.sortByKey(key);
     }
 
-    @GetMapping("/booking{id}sortedby{sortComparator}")
+    @GetMapping("/{id}/facilities/sort")
     public List<Facility> getFacilitySortedByKey(@PathVariable long id,
-                                                 @PathVariable SortComparator sortComparator) throws NoRecordException {
-        return bookingService.facilitySortedByKey(id, sortComparator);
+                                                 @RequestParam SortKey key) throws NoRecordException {
+        return bookingService.facilitySortedByKey(id, key);
     }
 
 }

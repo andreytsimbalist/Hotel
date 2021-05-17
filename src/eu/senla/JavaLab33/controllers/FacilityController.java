@@ -3,14 +3,14 @@ package eu.senla.JavaLab33.controllers;
 import eu.senla.JavaLab33.api.services.FacilityService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Facility;
-import eu.senla.JavaLab33.model.enums.SortComparator;
+import eu.senla.JavaLab33.model.enums.SortKey;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/facility")
+@RequestMapping("/v1/facilities")
 public class FacilityController {
 
     @Autowired
@@ -21,23 +21,19 @@ public class FacilityController {
         return facilityService.getAll();
     }
 
-    @PutMapping("/facility{id}newPrice{price}")
-    public void changeFacilityPrice(@PathVariable long id, @PathVariable double price) {
-        facilityService.changePrice(id, price);
+    @PutMapping
+    public void changeFacilityInfo(@RequestParam Facility facility) {
+        facilityService.changeInfo(facility);
     }
 
-    @GetMapping("/sortedby{sortComparator}")
-    public List<Facility> getFacilitiesSortedByKey(@PathVariable SortComparator sortComparator) {
-        return facilityService.sortByKey(sortComparator);
+    @GetMapping("/sort")
+    public List<Facility> getFacilitiesSortedByKey(@RequestParam SortKey key) {
+        return facilityService.sortByKey(key);
     }
 
     @PostMapping("/create")
     public long createFacility(@RequestBody Facility facility) {
-        try {
-            return facilityService.indexOf(facility);
-        } catch(NoRecordException noRecordException) {
-            return facilityService.create(facility);
-        }
+        return facilityService.indexOf(facility);
     }
 
     @GetMapping("/{id}")
