@@ -22,7 +22,7 @@ public class FacilityController {
     }
 
     @PutMapping
-    public void changeFacilityInfo(@RequestParam Facility facility) {
+    public void changeFacilityInfo(@RequestBody Facility facility) {
         facilityService.changeInfo(facility);
     }
 
