@@ -14,9 +14,7 @@ import java.util.Date;
 public class Facility extends BaseEntity {
 
     private String name;
-
     private double price;
-
     private Date dateAdded;
 
     public Facility(String name, double price) {

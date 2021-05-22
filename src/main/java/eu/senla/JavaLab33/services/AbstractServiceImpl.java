@@ -4,12 +4,13 @@ import eu.senla.JavaLab33.api.repositories.AbstractRepository;
 import eu.senla.JavaLab33.api.services.AbstractService;
 import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.BaseEntity;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 
 public abstract class AbstractServiceImpl<T extends BaseEntity> implements AbstractService<T> {
 
-    //@Autowired
+    @Autowired
     private AbstractRepository<T> abstractRepository;
 
     @Override

@@ -44,7 +44,7 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomSe
         if (comparator == null) {
             return null;
         }
-        return roomRepository.getFreeRooms()
+        return roomRepository.getRoomsByStatusEquals(RoomStatus.AVAILABLE)
                 .stream()
                 .sorted(comparator)
                 .collect(Collectors.toList());
@@ -88,7 +88,7 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomSe
 
     @Override
     public int numberOfFreeRooms() {
-        return roomRepository.getFreeRooms().size();
+        return roomRepository.getRoomsByStatusEquals(RoomStatus.AVAILABLE).size();
     }
 
 }
