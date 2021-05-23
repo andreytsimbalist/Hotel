@@ -6,8 +6,8 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
+import javax.persistence.OneToMany;
+import java.util.List;
 
 @Getter
 @Setter
@@ -19,9 +19,8 @@ public class Room extends BaseEntity {
     private RoomStatus status;
     private int capacity;
     private double price;
-    @OneToOne
-    @JoinColumn(name = "booking_id")
-    private Booking booking;
+    @OneToMany
+    private List<Booking> bookings;
 
     public Room(double price, int capacity, int stars) {
         status = RoomStatus.AVAILABLE;

@@ -5,7 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
 import java.util.Date;
+import java.util.List;
 
 @Getter
 @Setter
@@ -16,6 +18,8 @@ public class Facility extends BaseEntity {
     private String name;
     private double price;
     private Date dateAdded;
+    @ManyToMany
+    private List<Booking> bookings;
 
     public Facility(String name, double price) {
         this.name = name;

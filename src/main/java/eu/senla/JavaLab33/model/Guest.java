@@ -5,6 +5,9 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.Entity;
+import javax.persistence.ManyToMany;
+import java.util.ArrayList;
+import java.util.List;
 
 @Getter
 @Setter
@@ -15,6 +18,8 @@ public class Guest extends BaseEntity {
     private String firstName;
     private String secondName;
     private String phone;
+    @ManyToMany
+    private List<Booking> booking = new ArrayList<>();
 
     public Guest(String firstName, String secondName, String phone) {
         this.firstName = firstName;
