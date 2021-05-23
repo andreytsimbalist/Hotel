@@ -6,6 +6,7 @@ import lombok.Setter;
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -19,9 +20,9 @@ public class Booking extends BaseEntity {
     @ManyToOne
     private Room room;
     @ManyToMany
-    private List<Guest> guests;
+    private List<Guest> guests = new ArrayList<>();
     @ManyToMany
-    private List<Facility> facilities;
+    private List<Facility> facilities = new ArrayList<>();
 
     private String guestsToString() {
         StringBuilder result = new StringBuilder();

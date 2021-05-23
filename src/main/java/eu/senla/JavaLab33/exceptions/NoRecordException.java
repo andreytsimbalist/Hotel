@@ -1,8 +1,19 @@
 package eu.senla.JavaLab33.exceptions;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@AllArgsConstructor
 public class NoRecordException extends Exception {
 
-    public NoRecordException() {
-        super("No Record by your criteria exists in Data Storage.\n");
+    private String entityType;
+    private Long id;
+
+    @Override
+    public String getMessage() {
+        return "No Record by your criteria exists in Data Storage.";
     }
 }

@@ -6,6 +6,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.ManyToMany;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,12 +17,12 @@ import java.util.List;
 public class Facility extends BaseEntity {
 
     private String name;
-    private double price;
+    private Double price;
     private Date dateAdded;
     @ManyToMany
-    private List<Booking> bookings;
+    private List<Booking> bookings = new ArrayList<>();
 
-    public Facility(String name, double price) {
+    public Facility(String name, Double price) {
         this.name = name;
         this.price = price;
         dateAdded = new Date();

@@ -3,10 +3,14 @@ package eu.senla.JavaLab33.services;
 
 import eu.senla.JavaLab33.api.repositories.RoomRepository;
 import eu.senla.JavaLab33.api.services.RoomService;
+import eu.senla.JavaLab33.dto.RoomDto;
+import eu.senla.JavaLab33.exceptions.NoRecordException;
 import eu.senla.JavaLab33.model.Room;
 import eu.senla.JavaLab33.model.enums.FilterKey;
 import eu.senla.JavaLab33.model.enums.RoomStatus;
 import eu.senla.JavaLab33.model.enums.SortKey;
+import org.modelmapper.ModelMapper;
+import org.modelmapper.TypeToken;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,10 +20,28 @@ import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 @Service
-public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomService {
+public class RoomServiceImpl implements RoomService {
 
     @Autowired
     private RoomRepository roomRepository;
+    @Autowired
+    private ModelMapper modelMapper;
+
+    @Override
+    public RoomDto create(Room entity) {
+        return modelMapper.map(roomRepository.save(entity), RoomDto.class);
+    }
+
+    @Override
+    public RoomDto getById(Long id) throws NoRecordException {
+        return modelMapper.map(roomRepository.findById(id).orElseThrow(() -> new NoRecordException("Room", id)),
+                RoomDto.class);
+    }
+
+    @Override
+    public List<RoomDto> getAll() {
+        return modelMapper.map(roomRepository.findAll(), new TypeToken<List<RoomDto>>(){}.getType());
+    }
 
     @Override
     public void changeInfo(Room room) {
@@ -27,39 +49,47 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomSe
     }
 
     @Override
-    public List<Room> getRoomsFilterByKey(FilterKey filterKey, int capacity, RoomStatus roomStatus) {
+    public Integer numberOfFreeRooms() {
+        return roomRepository.getRoomsByStatusEquals(RoomStatus.AVAILABLE).size();
+    }
+
+    @Override
+    public List<RoomDto> getRoomsFilterByKey(FilterKey filterKey, Integer capacity, RoomStatus roomStatus) {
         Predicate<Room> predicate = getFilter(filterKey, capacity, roomStatus);
         if (predicate == null) {
             return null;
         }
-        return ((List<Room>) roomRepository.findAll())
+        return modelMapper.map(((List<Room>) roomRepository.findAll())
                 .stream()
                 .filter(predicate)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()),
+                new TypeToken<List<RoomDto>>(){}.getType());
     }
 
     @Override
-    public List<Room> sortFreeByKey(SortKey sortKey) {
+    public List<RoomDto> sortFreeByKey(SortKey sortKey) {
         Comparator<Room> comparator = getComparator(sortKey);
         if (comparator == null) {
             return null;
         }
-        return roomRepository.getRoomsByStatusEquals(RoomStatus.AVAILABLE)
+        return modelMapper.map(roomRepository.getRoomsByStatusEquals(RoomStatus.AVAILABLE)
                 .stream()
                 .sorted(comparator)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()),
+                new TypeToken<List<RoomDto>>(){}.getType());
     }
 
     @Override
-    public List<Room> sortByKey(SortKey sortKey) {
+    public List<RoomDto> sortByKey(SortKey sortKey) {
         Comparator<Room> comparator = getComparator(sortKey);
         if (comparator == null) {
             return null;
         }
-        return ((List<Room>) roomRepository.findAll())
+        return modelMapper.map(((List<Room>) roomRepository.findAll())
                 .stream()
                 .sorted(comparator)
-                .collect(Collectors.toList());
+                .collect(Collectors.toList()),
+                new TypeToken<List<RoomDto>>(){}.getType());
     }
 
     private Predicate<Room> getFilter(FilterKey filterKey, int capacity, RoomStatus roomStatus) {
@@ -84,11 +114,6 @@ public class RoomServiceImpl extends AbstractServiceImpl<Room> implements RoomSe
             default:
                 return null;
         }
-    }
-
-    @Override
-    public int numberOfFreeRooms() {
-        return roomRepository.getRoomsByStatusEquals(RoomStatus.AVAILABLE).size();
     }
 
 }

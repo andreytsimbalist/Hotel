@@ -7,6 +7,7 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.OneToMany;
+import java.util.ArrayList;
 import java.util.List;
 
 @Getter
@@ -15,14 +16,14 @@ import java.util.List;
 @NoArgsConstructor
 public class Room extends BaseEntity {
 
-    private int stars;
+    private Integer stars;
     private RoomStatus status;
-    private int capacity;
-    private double price;
+    private Integer capacity;
+    private Double price;
     @OneToMany
-    private List<Booking> bookings;
+    private List<Booking> bookings = new ArrayList<>();
 
-    public Room(double price, int capacity, int stars) {
+    public Room(Double price, Integer capacity, Integer stars) {
         status = RoomStatus.AVAILABLE;
         this.price = price;
         this.capacity = capacity;
